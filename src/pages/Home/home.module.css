@@ -1,0 +1,45 @@
+.head {}
+
+.head select {
+    background-color: rgb(50, 65, 68);
+    padding: 5px;
+    width: 250px;
+    margin-top: 40px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    font-size: 14pt;
+}
+
+.head select:nth-child(3) {
+    margin-left: 20px;
+}
+
+.items {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.pages {
+    width: auto;
+    margin: 20px auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pages button {
+    padding: 5px;
+    width: 70px;
+    background-color: rgb(50, 65, 68);
+    border: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.pages button:active {
+    transform: translate(5px, 5px);
+}

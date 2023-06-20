@@ -1,0 +1,48 @@
+.header {
+    width: 90%;
+    margin: 20px auto 20px auto;
+
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {}
+
+.search input {
+    width: 800px;
+    padding: 15px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: rgb(50, 65, 68);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.me {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.me h4 {
+    color: white;
+}
+
+.me img {
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+}
+
+.links {}

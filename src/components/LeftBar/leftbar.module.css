@@ -1,0 +1,25 @@
+.leftbar {}
+
+.leftbar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.leftbar nav>a, .profile>h2, .releases>h2, .top>h2 {
+    font-size: 24pt;
+    font-weight: 100;
+    color: rgb(234, 234, 236);
+}
+
+.leftbar li {
+    list-style: none;
+}
+
+.profile>li, .releases>li, .top>li {
+    font-size: 14pt;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

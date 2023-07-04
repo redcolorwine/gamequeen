@@ -26,7 +26,35 @@ export const gamesAPI = {
                 return response.data
             });
     },
+    getInfoAboutGame(id) { //0 - gameinfo //1 - screenshots //2 - same games //3 - trailers
+        return axios.all([
+            axios.get(`https://api.rawg.io/api/games/${id}?key=${process.env.REACT_APP_API_KEY}`),
+            axios.get(`https://api.rawg.io/api/games/${id}/screenshots?key=${process.env.REACT_APP_API_KEY}`),
+            // axios.get(`https://api.rawg.io/api/games/${id}/suggested?key=${process.env.REACT_APP_API_KEY}`),
+            axios.get(`https://api.rawg.io/api/games/${id}/movies?key=${process.env.REACT_APP_API_KEY}`)
+        ]).then(response => {
+            return response
+        })
+    },
+    async getWishList(wishList) {
 
+        let resWishList = [];
+        for (const wish of wishList) {
+
+            const response = await axios(`https://api.rawg.io/api/games/${wish}?key=${process.env.REACT_APP_API_KEY}`);
+            resWishList.push(response.data);
+
+        }
+        return resWishList;
+    },
+    //ПО ДАТАМ
+    //https://api.rawg.io/api/games?dates=2023-01-01,2023-01-02&key=ecff736f6be24dfa98d478b0ab02860f
+    getGamesByDate(page = 1, pageSize = 20, ordering = '-added', parent_platforms = [0, 1, 2, 3, 4, 5, 6, 7, 8], date1, date2) {
+        return axios.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&dates=${date1+`,`+date2}&page=${page}&page_size=${pageSize}&parent_platforms=${parent_platforms}&ordering=${ordering}`)
+            .then(response => {
+                return response.data
+            });
+    },
     // getFilmsForMainPage(page = 1) {
     //     return axios.all([
     //         axios.get('https://api.themoviedb.org/3/discover/movie?api_key=2c395216a9e2efaac337ffbc09ff1ee8&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_watch_monetization_types=flatrate'),

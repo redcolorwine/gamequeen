@@ -9,8 +9,10 @@ import playstation from './../../media/icons/platforms/playstation.png';
 import linux from './../../media/icons/platforms/linux.png';
 import macintosh from './../../media/icons/platforms/macintosh.png';
 import web from './../../media/icons/platforms/web.png';
+import { useNavigate } from 'react-router-dom';
 //img={zelda} name={'Legend of zelda tears of the kingdom'} added={340} score={96} releaseDate={'May 12, 2023'} genres={['Action', 'Adventure']} chart={'#10 top2023'}
 const GameItem = (props) => {
+
     const platformImgs = {
         'PC': computer,
         'Xbox': xbox,
@@ -24,20 +26,22 @@ const GameItem = (props) => {
         'Nintendo': nintendo,
         'Web': web
     }
+
+    const navigate = useNavigate();
+
+    const handleClick = (id) => {
+        navigate(`/game/${id}`);
+    }
+
     return (
-        <div className={cmedia.gameItem}>
-            <img src={props.img} alt="" srcset="" />
+        <div className={cmedia.gameItem} onClick={() => handleClick(props.id)}>
+            <img src={props.img} alt="" />
             <div className={cmedia.abouttext}>
                 <div className={cmedia.platformAndScore}>
                     <div className={cmedia.platforms}>
-                        {/* <img src={nintendo} alt="" />
-                        <img src={iOS} alt="" />
-                        <img src={android} alt="" />
-                        <img src={playstation} alt="" />
-                        <img src={xbox} alt="" /> */}
                         {props.platforms.map(pl => {
                             let plat = pl.platform.name;
-                            return (<><img src={platformImgs[plat]} /></>)
+                            return (<div key={pl.platform.name}><img src={platformImgs[plat]} /></div>)
                         })}
                     </div>
                     <div className={cmedia.score}>
@@ -56,7 +60,7 @@ const GameItem = (props) => {
                 <div className={cmedia.genres}>
                     <p>Genres:</p>
                     <p>{props.genres.map(el => {
-                        return (<span> {el.name} </span>)
+                        return (<span key={el.name}> {el.name} </span>)
                     })}</p>
                 </div>
                 <div className={cmedia.rating}>

@@ -70,6 +70,7 @@ let searchPageReducer = (state = initialState, action) => {
 
 export const searchGamesThunk = (page, pageSize, ordering, parent_platforms, search) => {
     return (dispatch) => {
+        dispatch(searchPageLoading(true))
         gamesAPI.searchGamesByQuery(page, pageSize, ordering, parent_platforms, search).then(response => {
             dispatch(setGames(response))
             dispatch(searchPageLoading(false))

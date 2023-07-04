@@ -1,14 +1,43 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import cmedia from './header.module.css';
 import ava from './../../media/7309681.jpg';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
 
     const [query, setQuery] = useState('');
     const inpRef = useRef();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (props.isAuth) {
+            // props.setAuthData(localStorage.getItem('authData').split(','));
+            if (localStorage.getItem('countUsers') && localStorage.getItem('countUsers') == 1) {
+                // props.setAuthData(localStorage.getItem('authData1').split(','));
+                props.setAuthData(JSON.parse(localStorage.getItem('authData1')));
+
+            } else if ((localStorage.getItem('countUsers') && localStorage.getItem('countUsers') >= 2)) {
+                let cU = localStorage.getItem('countUsers');
+                // cU.concat('authData')
+                console.log(localStorage.getItem('countUsers'))
+                console.log(`authData${cU}`)
+                // props.setAuthData(localStorage.getItem(`authData${cU}`).split(','));
+                props.setAuthData(JSON.parse(localStorage.getItem(`authData${cU}`)));
+            }
+        }
+
+    }, [])
+
+    const logOut = (event) => {
+        event.preventDefault();
+        localStorage.clear();
+        props.setIsAuth(false);
+    }
+    const logIn = (event) => {
+        event.preventDefault();
+        // props.setIsAuth(true);
+        navigate('/auth');
+    }
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             inpRef.current.value = '';
@@ -18,6 +47,7 @@ const Header = () => {
         setQuery('');
     };
 
+    console.log(props.isAuth)
     return (
         <div className={cmedia.header}>
             <div className={cmedia.nav}>
@@ -35,11 +65,13 @@ const Header = () => {
 
                     <div className={cmedia.me}>
                         <img src={ava} alt="" />
-                        <h4>redcolorwine</h4>
+                        <h4>{props.authData ? props.authData.nick : 'anonymous'}</h4>
                     </div>
 
                     <div className={cmedia.links}>
-                        <a href="#">my library</a>
+                        {props.authData.nick ? <a href="#" onClick={logOut}>log out </a> : <a href="#" onClick={logIn}>log in </a>}
+
+                        <NavLink to="library">my library</NavLink>
                     </div>
 
                 </div>

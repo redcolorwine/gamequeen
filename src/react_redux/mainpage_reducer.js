@@ -44,7 +44,6 @@ let initialState = {
 
 let mainPageReducer = (state = initialState, action) => {
     switch (action.type) {
-
         case 'SET_GAMES': {
             return {
                 ...state,
@@ -70,6 +69,7 @@ let mainPageReducer = (state = initialState, action) => {
 
 export const setGamesThunk = (page, pageSize, ordering, parent_platforms) => {
     return (dispatch) => {
+        dispatch(mainPageLoading(true))
         gamesAPI.getGamesForMainPage(page, pageSize, ordering, parent_platforms).then(response => {
             dispatch(setGames(response))
             dispatch(mainPageLoading(false))

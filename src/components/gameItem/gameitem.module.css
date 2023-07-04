@@ -6,7 +6,12 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: rgb(50, 65, 68);
+    cursor: pointer;
+    transition: 0.5s;
+}
 
+.gameItem:hover {
+    transform: scale(1.02, 1.02);
 }
 
 .gameItem h1, h2, h3, h4, p {

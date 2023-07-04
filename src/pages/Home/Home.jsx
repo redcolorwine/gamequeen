@@ -6,6 +6,7 @@ import Preloader from '../../components/preloader/Preloader';
 import { FiArrowRight } from "react-icons/fi";
 import { FiArrowLeft } from "react-icons/fi";
 import gameu from './../../media/images/gameu.jpg';
+import moment from 'moment/moment';
 
 const Home = (props) => {
 
@@ -18,6 +19,7 @@ const Home = (props) => {
 
   useEffect(() => {
     props.setGames(page, 20, ordering, parent_platforms);
+  
   }, [page, ordering, parent_platforms])
 
 
@@ -47,12 +49,12 @@ const Home = (props) => {
           <h1>Home</h1>
           <select name="platform" id="" onChange={(e) => { setPlatforms(e.target.value); setPage(1) }}>
             {props.platformOptions.map(el => {
-              return (<option value={el.optVal}>{el.optName}</option>)
+              return (<option key={el.optVal} value={el.optVal}>{el.optName}</option>)
             })}
           </select>
           <select name="order" id="" onChange={(e) => { setOrdering(e.target.value); setPage(1) }}>
             {props.orderOptions.map(el => {
-              return (<option value={el.optVal}>{el.optName}</option>)
+              return (<option key={el.optVal} value={el.optVal}>{el.optName}</option>)
             })}
           </select>
 
@@ -60,6 +62,7 @@ const Home = (props) => {
         <div className={cmedia.items}>
           {props.games.results.map((game) => {
             return (<GameItem id={game.id}
+              key={game.id}
               img={game?.background_image ? game.background_image : gameu}
               added={game.added}
               name={game.name}

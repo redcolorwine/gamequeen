@@ -6,6 +6,7 @@ import aboutGameReducer from "./aboutgame_reducer";
 import authReducer from "./auth_reducer";
 import userReducer from "./user_reducer";
 import releasesReducer from "./releases_reducer";
+import topsReducer from "./tops_reducer";
 
 let reducers = combineReducers({
     main: mainPageReducer,
@@ -13,7 +14,8 @@ let reducers = combineReducers({
     about: aboutGameReducer,
     auth: authReducer,
     user: userReducer,
-    releases:releasesReducer
+    releases:releasesReducer,
+    tops:topsReducer
 })
 
 let store = createStore(reducers, applyMiddleware(thunk));

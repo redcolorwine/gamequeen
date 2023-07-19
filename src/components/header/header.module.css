@@ -46,3 +46,52 @@
 }
 
 .links {}
+
+@media screen and (max-width:1201px) {
+
+    .search input {
+        width: 600px;
+        padding: 15px;
+    }
+
+}
+
+@media screen and (max-width:1025px) {
+    .search input {
+        width: 300px;
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width:769px) {
+    .header {
+        width: 100%;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .logo {}
+
+    .search {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .search input {
+        width: 100%;
+    }
+
+    .profile {
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width:481px) {}
+
+@media screen and (max-width:320px) {}

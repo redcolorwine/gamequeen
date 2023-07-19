@@ -10,10 +10,24 @@
     font-size: 24pt;
     font-weight: 100;
     color: rgb(234, 234, 236);
+    transition: 0.5s;
+}
+
+.leftbar nav>a:hover {
+    color: burlywood;
 }
 
 .leftbar li {
     list-style: none;
+}
+
+.leftbar li a {
+    transition: 0.5s;
+}
+
+.leftbar li a:hover {
+    transform: scale(1.05, 1.05);
+    color: white;
 }
 
 .profile>li, .releases>li, .top>li {
@@ -23,3 +37,40 @@
     align-items: center;
     gap: 10px;
 }
+
+
+@media screen and (max-width:1201px) {}
+
+@media screen and (max-width:1025px) {}
+
+@media screen and (max-width:769px) {
+    .leftbar nav {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        gap: 20px;
+    }
+
+    .profile, .releases, .top {
+        width: 100%;
+        text-align: center;
+    }
+
+    .profile>li, .releases>li, .top>li {
+        width: 200px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .profile>li a, .releases>li a, .top>li a {
+
+        margin: 0 auto;
+
+    }
+}
+
+@media screen and (max-width:481px) {}
+
+@media screen and (max-width:320px) {}

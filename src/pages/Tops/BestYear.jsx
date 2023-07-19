@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import cmedia from './releases.module.css';
+import cmedia from './tops.module.css';
 import Preloader from '../../components/preloader/Preloader';
 import moment from 'moment';
 import GameItem from '../../components/gameItem/GameItem';
 import gameu from './../../media/images/gameu.jpg';
 import { FiArrowRight } from "react-icons/fi";
 import { FiArrowLeft } from "react-icons/fi";
-const Last30days = (props) => {
-
+const BestYear = (props) => {
     const [page, setPage] = useState(1);
-    const [ordering, setOrdering] = useState('-added')
+    const [ordering, setOrdering] = useState('-metacritic')
     const [parent_platforms, setPlatforms] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8])
 
     const leftClick = () => {
@@ -19,34 +18,37 @@ const Last30days = (props) => {
     }
 
     const rightClick = () => {
-        if (page < props.releases.count / 20) {
+        if (page < props.tops.count / 20) {
             setPage(page + 1)
         }
     }
 
-
     useEffect(() => {
         var d = new Date();
         var s = new Date();
-        d.setMonth(d.getMonth() - 1);
-        props.get30days(page, 20, ordering, parent_platforms, moment(d).format('YYYY-MM-DD'), moment(s).format('YYYY-MM-DD'))
+        
+        var dYear = d.getFullYear(); 
+        console.log(moment(`${dYear}-01-01`).format(`YYYY-MM-DD`))
+        console.log(moment(s).format('YYYY-MM-DD'))
+        props.bestYear(page, 20, ordering, parent_platforms, moment(`${dYear}-01-01`).format('YYYY-MM-DD'), moment(s).format('YYYY-MM-DD'), 'bestyear')
     }, [page])
 
-    if (!props.releases) {
+    if (!props.tops) {
         return (
             <Preloader />
         )
     }
     else {
-        console.log(props.releases)
+        console.log(props.tops.results)
         return (
-            <div className={cmedia.last30days}>
+            <div className={cmedia.bestYear}>
                 <div className={cmedia.head}>
-                    <h1>Last 30 days</h1>
+                    <h1>Best Year</h1>
                 </div>
 
                 <div className={cmedia.items}>
-                    {props.releases.results.map((game) => {
+                    {props.tops.results.map((game) => {
+                        
                         return (<GameItem id={game.id}
                             key={game.id}
                             img={game?.background_image ? game.background_image : gameu}
@@ -71,7 +73,6 @@ const Last30days = (props) => {
             </div>
         )
     }
-
 }
 
-export default Last30days
+export default BestYear

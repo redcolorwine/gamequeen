@@ -18,9 +18,11 @@
   display: flex;
   gap: 40px;
 }
-.rightBlock{
+
+.rightBlock {
   width: 100%;
 }
+
 body {
   background-color: rgb(16, 16, 16);
 
@@ -29,3 +31,21 @@ body {
 a {
   text-decoration: none;
 }
+
+@media screen and (max-width:1201px) {}
+
+@media screen and (max-width:1025px) {}
+
+@media screen and (max-width:769px) {
+  .App-wrapper {
+    width: 90%;
+    margin: 40px auto 0px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+@media screen and (max-width:481px) {}
+
+@media screen and (max-width:320px) {}

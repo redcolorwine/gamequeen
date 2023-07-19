@@ -6,7 +6,7 @@ import GameItem from '../../components/gameItem/GameItem';
 import gameu from './../../media/images/gameu.jpg';
 import { FiArrowRight } from "react-icons/fi";
 import { FiArrowLeft } from "react-icons/fi";
-const Last30days = (props) => {
+const NextWeek = (props) => {
 
     const [page, setPage] = useState(1);
     const [ordering, setOrdering] = useState('-added')
@@ -24,12 +24,13 @@ const Last30days = (props) => {
         }
     }
 
-
     useEffect(() => {
         var d = new Date();
         var s = new Date();
-        d.setMonth(d.getMonth() - 1);
-        props.get30days(page, 20, ordering, parent_platforms, moment(d).format('YYYY-MM-DD'), moment(s).format('YYYY-MM-DD'))
+        d.setDate(d.getDate() + 7);
+        console.log(moment(d).format('YYYY-MM-DD'))
+        console.log(moment(s).format('YYYY-MM-DD'))
+        props.getNextWeek(page, 20, ordering, parent_platforms, moment(s).format('YYYY-MM-DD'), moment(d).format('YYYY-MM-DD'))
     }, [page])
 
     if (!props.releases) {
@@ -40,9 +41,9 @@ const Last30days = (props) => {
     else {
         console.log(props.releases)
         return (
-            <div className={cmedia.last30days}>
+            <div className={cmedia.NextWeek}>
                 <div className={cmedia.head}>
-                    <h1>Last 30 days</h1>
+                    <h1>Next week</h1>
                 </div>
 
                 <div className={cmedia.items}>
@@ -74,4 +75,4 @@ const Last30days = (props) => {
 
 }
 
-export default Last30days
+export default NextWeek;

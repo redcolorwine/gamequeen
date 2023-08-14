@@ -18,8 +18,9 @@
 .items {
     margin-top: 40px;
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 8px;
 }
 
 .pages {
@@ -87,6 +88,7 @@
         margin-top: 40px;
         font-size: 12pt;
     }
+
     .head select:nth-child(3) {
         margin-left: 0px;
     }

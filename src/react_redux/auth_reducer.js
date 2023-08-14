@@ -1,7 +1,9 @@
+import { authAPI } from "../api/api";
+
 let initialState = {
-    isAuth: true,
+    isAuth: false,
     authData: '',
-    wishList: [3498, 5679, 14189, 12479, 3070, 278],
+    wishList: [],
 }
 
 
@@ -31,7 +33,44 @@ let authReducer = (state = initialState, action) => {
 
 }
 
+export const registerThunk = (email, password) => {
 
+    return (dispatch) => {
+        localStorage.clear()
+        authAPI.register(email, password).then(response => {
+            dispatch(setAuthData(response.data.email));
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('user', response.data.userEmail)
+            localStorage.setItem('userId', response.data.userId)
+            dispatch(setIsAuth(true))
+        }).catch(error => {
+            dispatch(setAuthData(error))
+        })
+    }
+}
+export const loginThunk = (email, password) => {
+
+    return (dispatch) => {
+        localStorage.clear()
+        authAPI.login(email, password).then(response => {
+            dispatch(setAuthData(response.data.email));
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('user', response.data.userEmail)
+            localStorage.setItem('userId', response.data.userId)
+            dispatch(setIsAuth(true))
+        }).catch(error => {
+            dispatch(setAuthData(error))
+        })
+    }
+}
+export const logoutThunk = () => {
+
+    return (dispatch) => {
+        localStorage.clear()
+        dispatch(setIsAuth(false))
+
+    }
+}
 export const setIsAuth = (auth) => {
     return {
         type: 'SET_IS_AUTH', auth

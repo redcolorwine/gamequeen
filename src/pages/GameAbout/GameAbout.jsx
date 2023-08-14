@@ -13,8 +13,17 @@ import macintosh from './../../media/icons/platforms/macintosh.png';
 import web from './../../media/icons/platforms/web.png';
 import DOMPurify from 'dompurify';
 import defaultImg from './../../media/images/gameu.jpg';
-
+import { AiOutlineClose, AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
+import { FcLike } from "react-icons/fc";
 const GameAbout = (props) => {
+    useEffect(() => {
+        if (localStorage.getItem('userId')) {
+            props.getWishThunk(localStorage.getItem('userId'))
+        }
+        props.setGameInfo(id);
+
+    }, [props.wishList])
+
     const platformImgs = {
         'PC': computer,
         'Xbox': xbox,
@@ -29,31 +38,59 @@ const GameAbout = (props) => {
         'Web': web
     }
     const [curScreen, setCurScreen] = useState(0)
-
+    
     const { id } = useParams();
 
-    useEffect(() => {
-        props.setGameInfo(id);
-    }, [])
+    const addWish = (e) => {
+        e.preventDefault();
+        if (localStorage.getItem('token') && localStorage.getItem('userId')) {
+            props.setWishList(localStorage.getItem('userId'), id)
+        }
+        else {
+            alert('Вы не зарегистрированы!')
+        }
+    }
+    const deleteWish = (e) => {
+        e.preventDefault();
+        if (localStorage.getItem('token') && localStorage.getItem('userId')) {
+            props.deleteWish(localStorage.getItem('userId'), id)
+        }
+        else {
+            alert('Вы не зарегистрированы!')
+        }
+    }
 
-    if (props.isGameInfoLoading) {
+
+    if (props.isGameInfoLoading && !props.wishData.id) {
+
         return (
             <><Preloader /></>
         )
 
     }
     else {
-        console.log(props.gameInfo.data)
-        console.log(props.gameScreenshots.data.results)
-        console.log(props.gameTrailers.data.results)
+        console.log(props.wishData.find(e => e.id == id))
         return (
             <div className={cmedia.gameAbout}>
                 <div className={cmedia.head}>
                     <h1>{props.gameInfo.data.name}</h1>
+                   
+
                 </div>
                 <div className={cmedia.firstBlock}>
+
                     <div className={cmedia.shortDesc}>
                         <h2>Short description</h2>
+                        <div className={cmedia.platforms}>
+                            
+                            {props.gameInfo.data.parent_platforms.map(pl => {
+                                let plat = pl.platform.name;
+                                return (<><img src={platformImgs[plat]} /></>)
+                            })}
+                        </div>
+                        {props.wishData.find(e => e.id == id) ? <div className={cmedia.wishButton} onClick={(e) => deleteWish(e)}><FcLike size={25} /> Already in your wishlist </div>
+                        : <div className={cmedia.wishButton} onClick={(e) => addWish(e)}><AiOutlineHeart color='red' size={25} />  WISH</div>
+                    }
                         <p><span>Added: </span>{props.gameInfo.data.added} </p>
                         <div className={cmedia.developers}>
                             <p><span>Developers:</span> {props.gameInfo.data?.developers ? props.gameInfo.data.developers.map(dev => {
@@ -78,13 +115,7 @@ const GameAbout = (props) => {
                         <div className={cmedia.metacritic}>
                             <p><span>Metacritic: </span><a href={props.gameInfo.data?.metacritic_url ? props.gameInfo.data.metacritic_url : '#'}>{props.gameInfo.data?.metacritic ? props.gameInfo.data.metacritic : ''} </a></p>
                         </div>
-                        <div className={cmedia.platforms}>
-                            <p><span>Platforms: </span></p>
-                            {props.gameInfo.data.parent_platforms.map(pl => {
-                                let plat = pl.platform.name;
-                                return (<><img src={platformImgs[plat]} /></>)
-                            })}
-                        </div>
+                       
                         <div className={cmedia.rating}>
                             <p><span>Rating: </span>{props.gameInfo.data?.rating ? props.gameInfo.data.rating : ''}</p>
                         </div>
@@ -100,6 +131,7 @@ const GameAbout = (props) => {
                                     return (<> {store.store?.image_background ? <img src={store.store.image_background} /> : ''} </>)
                                 }) : ''}
                             </div>
+
                         </div>
                     </div>
                     <div className={cmedia.screens}>
@@ -111,7 +143,9 @@ const GameAbout = (props) => {
                                 return (<img key={index} src={item.image} onClick={() => setCurScreen(index)} className={`${index == curScreen ? `${cmedia.active}` : ''}`} />)
                             }) : <></>}
                         </div>
+
                     </div>
+
                 </div>
                 <div className={cmedia.longDescr}>
                     <h2>Description</h2>

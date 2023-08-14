@@ -10,23 +10,9 @@ const Header = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (props.isAuth) {
-            // props.setAuthData(localStorage.getItem('authData').split(','));
-            if (localStorage.getItem('countUsers') && localStorage.getItem('countUsers') == 1) {
-                // props.setAuthData(localStorage.getItem('authData1').split(','));
-                props.setAuthData(JSON.parse(localStorage.getItem('authData1')));
 
-            } else if ((localStorage.getItem('countUsers') && localStorage.getItem('countUsers') >= 2)) {
-                let cU = localStorage.getItem('countUsers');
-                // cU.concat('authData')
-                console.log(localStorage.getItem('countUsers'))
-                console.log(`authData${cU}`)
-                // props.setAuthData(localStorage.getItem(`authData${cU}`).split(','));
-                props.setAuthData(JSON.parse(localStorage.getItem(`authData${cU}`)));
-            }
-        }
 
-    }, [])
+    }, [props.isAuth])
 
     const logOut = (event) => {
         event.preventDefault();
@@ -65,11 +51,11 @@ const Header = (props) => {
 
                     <div className={cmedia.me}>
                         <img src={ava} alt="" />
-                        <h4>{props.authData ? props.authData.nick : 'anonymous'}</h4>
+                        <h4>{localStorage.getItem('user') ? localStorage.getItem('user') : 'anonymous'}</h4>
                     </div>
 
                     <div className={cmedia.links}>
-                        {props.authData.nick ? <a href="#" onClick={logOut}>log out </a> : <a href="#" onClick={logIn}>log in </a>}
+                        {localStorage.getItem('user') ? <a href="#" onClick={() => props.logout()}>log out </a> : <a href="#" onClick={logIn}>log in </a>}
 
                         <NavLink to="library">my library</NavLink>
                     </div>

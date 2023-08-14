@@ -7,7 +7,11 @@ import gameu from './../../media/images/gameu.jpg';
 const Wishlist = (props) => {
 
     useEffect(() => {
-        props.getWishList(props.wishList)
+        // props.getWishList(props.wishList)
+        if (localStorage.getItem('userId')) {
+            props.getWishThunk(localStorage.getItem('userId'))
+        }
+
     }, [])
 
     if (!props.wishData) {
@@ -20,7 +24,7 @@ const Wishlist = (props) => {
         console.log(props.wishData)
         return (
             <div className={cmedia.wishList}>
-            <div className={cmedia.head}>
+                <div className={cmedia.head}>
                     <h1>My library </h1>
                 </div>
                 <div className={cmedia.items}>

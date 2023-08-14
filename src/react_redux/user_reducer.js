@@ -1,8 +1,8 @@
-import { gamesAPI } from "../api/api"
+import { authAPI, gamesAPI } from "../api/api"
 
 let initialState = {
-    wishList: [3498, 5679, 3328, 19487, 3070, 278],
-    wishData: '',
+    wishList: [],
+    wishData: [],
     isWishPageLoading: false,
 }
 
@@ -17,7 +17,7 @@ let userReducer = (state = initialState, action) => {
         }
 
         case 'GET_WISH_DATA': {
-          
+
             return {
                 ...state,
                 wishData: action.wishData
@@ -50,6 +50,42 @@ export const getWishListDataThunk = (wishList) => {
     }
 }
 
+export const addWishThunk = (userId, gameId) => {
+    return (dispatch) => {
+        authAPI.addFavourite(userId, gameId).then(response => {
+            dispatch(setWishList(response))
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+}
+export const deleteWishThunk = (userId, gameId) => {
+    return (dispatch) => {
+        authAPI.deleteFavourite(userId, gameId).then(response => {
+            dispatch(setWishList(response))
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+}
+export const getWishThunk = (userId) => {
+    return (dispatch) => {
+        dispatch(isWishPageLoading(true))
+        authAPI.getFavourite(userId).then(response => {
+            
+            // console.log(response)
+            gamesAPI.getWishList(response.data[0].favourite).then(response=>{
+                dispatch(getWishData(response))
+                dispatch(isWishPageLoading(false))
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+      
+
+    }
+}
 export const getWishData = (wishData) => {
     return {
         type: 'GET_WISH_DATA', wishData
@@ -61,5 +97,9 @@ export const isWishPageLoading = (loading) => {
         type: 'IS_WISHPAGE_LOADING', loading
     }
 }
-
+export const setWishList = (wishList) => {
+    return {
+        type: 'SET_WISH_LIST', wishList
+    }
+}
 export default userReducer;

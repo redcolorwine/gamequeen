@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import Auth from "./Auth"
-import { setAuthData, setIsAuth } from "../../react_redux/auth_reducer"
+import { loginThunk, registerThunk, setAuthData, setIsAuth } from "../../react_redux/auth_reducer"
 
 let mapStateToProps = (state) => {
     return {
@@ -16,6 +16,12 @@ let mapDispatchToProps = (dispatch) => {
         },
         setAuthData: (authData) => {
             dispatch(setAuthData(authData));
+        },
+        register: (email, password) => {
+            dispatch(registerThunk(email, password))
+        },
+        login:(email, password) => {
+            dispatch(loginThunk(email, password))
         }
     }
 }

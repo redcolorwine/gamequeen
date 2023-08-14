@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { setAuthData, setIsAuth } from "../../react_redux/auth_reducer"
+import { logoutThunk, setAuthData, setIsAuth } from "../../react_redux/auth_reducer"
 import Header from "./header"
 
 let mapStateToProps = (state) => {
@@ -16,6 +16,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         setAuthData: (authData) => {
             dispatch(setAuthData(authData));
+        },
+        logout: () => {
+            dispatch(logoutThunk());
         }
     }
 }

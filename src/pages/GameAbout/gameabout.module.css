@@ -59,7 +59,10 @@
     width: 100%;
     height: 450px;
     object-fit: cover;
+    cursor: pointer;
 }
+
+
 
 .otherImgs img {
     width: 50px;
@@ -99,6 +102,56 @@
     transform: scale(1.02, 1.02);
     color: pink;
     cursor: pointer;
+}
+
+.openImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
+
+.openImg .closeBut {
+    position: absolute;
+    top: 2%;
+    right: 1%;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.openImg .closeBut:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.openImg img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.openImg .arrows {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translate(-0%, -50%);
+}
+
+.arrowButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.arrow {
+    cursor: pointer;
+    transition: 0.3s;
+
+}
+
+.arrow:hover {
+    transform: scale(1.2, 1.2);
 }
 
 @media screen and (max-width:1201px) {
@@ -168,6 +221,9 @@
 
     .active {
         border: 2px solid white;
+    }
+    .openImg {
+        display: none;
     }
 }
 

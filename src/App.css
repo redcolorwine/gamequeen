@@ -14,9 +14,11 @@
 
 .App-wrapper {
   width: 90%;
+  height: 100%;
   margin: 100px auto 0px auto;
   display: flex;
   gap: 40px;
+  position: relative;
 }
 
 .rightBlock {

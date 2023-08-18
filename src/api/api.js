@@ -32,7 +32,9 @@ export const gamesAPI = {
             axios.get(`https://api.rawg.io/api/games/${id}?key=${process.env.REACT_APP_API_KEY}`),
             axios.get(`https://api.rawg.io/api/games/${id}/screenshots?key=${process.env.REACT_APP_API_KEY}`),
             // axios.get(`https://api.rawg.io/api/games/${id}/suggested?key=${process.env.REACT_APP_API_KEY}`),
-            axios.get(`https://api.rawg.io/api/games/${id}/movies?key=${process.env.REACT_APP_API_KEY}`)
+            axios.get(`https://api.rawg.io/api/games/${id}/movies?key=${process.env.REACT_APP_API_KEY}`),
+            instance.post('reviews/get', { gameId: id })
+
         ]).then(response => {
             return response
         })
@@ -100,6 +102,13 @@ export const authAPI = {
     },
     getFavourite(userId) {
         return instance.post('users/getfavourite', { id: userId }).then(response => {
+            return response
+        }).catch(err => {
+            console.log(err)
+        });
+    },
+    getGameReview(gameId) {
+        return instance.post('reviews/get', { gameId: gameId }).then(response => {
             return response
         }).catch(err => {
             console.log(err)

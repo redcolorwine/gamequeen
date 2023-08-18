@@ -1,0 +1,24 @@
+.commentItem {
+    background-color: rgb(128, 128, 128, 0.7);
+    border-radius: 5px;
+    margin: 10px 0px 10px 0px;
+    padding: 5px;
+}
+
+.commentItem p>span {
+    color: white;
+    font-size: 14pt;
+}
+
+.commentAbout {
+    margin-top: 10px;
+}
+
+.commentAbout p {
+    color: rgb(205, 129, 80) !important;
+
+}
+
+p.commentDate {
+    color: rgb(156, 161, 154) !important;
+}

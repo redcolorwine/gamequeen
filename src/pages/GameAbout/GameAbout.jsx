@@ -16,6 +16,7 @@ import defaultImg from './../../media/images/gameu.jpg';
 import { AiOutlineClose, AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { FcLike, FcCancel, FcPrevious, FcNext } from "react-icons/fc";
 import { BsFillCaretLeftFill, BsFillCaretRightFill, BsXCircleFill } from "react-icons/bs";
+import CommentItem from '../../components/commentItem/CommentItem';
 const GameAbout = (props) => {
 
     useEffect(() => {
@@ -24,7 +25,11 @@ const GameAbout = (props) => {
         }
         props.setGameInfo(id);
 
+        // props.getComments(id);
+
     }, [props.wishList])
+
+
 
     const platformImgs = {
         'PC': computer,
@@ -84,7 +89,7 @@ const GameAbout = (props) => {
             }
         }
     }
-   
+
     if (props.isGameInfoLoading && !props.wishData.id) {
         return (
             <><Preloader /></>
@@ -98,19 +103,22 @@ const GameAbout = (props) => {
 
                 {openImg &&
                     <div className={cmedia.openImg}>
-                        {props.gameScreenshots.data?.results ? <img src={props.gameScreenshots.data.results[curScreen].image} /> : <img src={defaultImg} />}
-                        <div className={cmedia.closeBut}><BsXCircleFill color='white' fill='white' size={45} onClick={() => { setOpenImg(false) }} /></div>
-                        <div className={cmedia.arrows}>
-                            <div className={cmedia.arrowButtons}>
-                                <div className={cmedia.arrow}>
-                                    <BsFillCaretLeftFill size={65} color='white' fill='white' onClick={() => clickLeftArrow()} />
+                        <div className={cmedia.openWrapper}>
+                            {props.gameScreenshots.data?.results ? <img src={props.gameScreenshots.data.results[curScreen].image} /> : <img src={defaultImg} />}
+                            <div className={cmedia.closeBut}><BsXCircleFill color='white' fill='white' size={45} onClick={() => { setOpenImg(false) }} /></div>
+                            <div className={cmedia.arrows}>
+                                <div className={cmedia.arrowButtons}>
+                                    <div className={cmedia.arrow}>
+                                        <BsFillCaretLeftFill size={65} color='white' fill='white' onClick={() => clickLeftArrow()} />
+                                    </div>
+                                    <div className={cmedia.arrow}>
+                                        <BsFillCaretRightFill size={65} color='white' fill='white' onClick={() => clickRightArrow()} />
+                                    </div>
                                 </div>
-                                <div className={cmedia.arrow}>
-                                    <BsFillCaretRightFill size={65} color='white' fill='white' onClick={() => clickRightArrow()} />
-                                </div>
-                            </div>
 
+                            </div>
                         </div>
+
                     </div>}
 
                 <div className={cmedia.head}>
@@ -196,9 +204,21 @@ const GameAbout = (props) => {
                 <div className={cmedia.longDescr}>
                     <h2>Description</h2>
                     <div className={cmedia.longDescrText} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.gameInfo.data.description) }}>
-
                     </div>
 
+                </div>
+                <div className={cmedia.comments}>
+                    <h2>Comments</h2>
+                    {props.comments?.data ? props.comments.data.map(comment => {
+                        return (
+                            <CommentItem content={comment.content} email={comment.author.email} createdAt={comment.createdAt} />)
+                    }) :
+                        <h2>No comments</h2>
+                    }
+                    <div className={cmedia.addComment}>
+                        <textarea name="comm" id="" cols="30" rows="5"></textarea>
+                        <button>Send</button>
+                    </div>
                 </div>
             </div>
         )

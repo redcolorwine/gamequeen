@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import GameAbout from "./GameAbout"
-import { setGameInfoThunk } from "../../react_redux/aboutgame_reducer"
+import { setGameCommentsThunk, setGameInfoThunk } from "../../react_redux/aboutgame_reducer"
 import { addWishThunk, deleteWishThunk, getWishThunk } from "../../react_redux/user_reducer"
 
 
@@ -13,7 +13,8 @@ let mapStateToProps = (state) => {
         gameScreenshots: state.about.gameScreenshots,
         isGameInfoLoading: state.about.isGameInfoLoading,
         wishData: state.user.wishData,
-        wishList:state.user.wishList
+        wishList:state.user.wishList,
+        comments:state.about.comments
     }
 }
 
@@ -30,6 +31,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         getWishThunk: (userId) => {
             dispatch(getWishThunk(userId))
+        },
+        getComments:(gameId)=>{
+            dispatch(setGameCommentsThunk(gameId))
         }
     }
 }

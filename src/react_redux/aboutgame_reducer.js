@@ -1,10 +1,11 @@
-import { gamesAPI } from "../api/api"
+import { authAPI, gamesAPI } from "../api/api"
 
 let initialState = {
     gameInfo: [],
     sameGames: [],
     gameTrailers: [],
     gameScreenshots: [],
+    comments: [],
     isGameInfoLoading: true,
 }
 //0 - gameinfo //1 - screenshots //2 - same games //3 - trailers
@@ -19,7 +20,12 @@ let aboutGameReducer = (state = initialState, action) => {
                 gameInfo: action.gameInfo
             }
         }
-
+        case 'SET_GAME_COMMENTS': {
+            return {
+                ...state,
+                comments: action.comments
+            }
+        }
         case 'SET_SAME_GAMES': {
             return {
                 ...state,
@@ -64,16 +70,31 @@ export const setGameInfoThunk = (id) => {
             dispatch(setGameScreenshots(response[1]))
             // dispatch(setSameGames(response[2]))
             dispatch(setGameTrailers(response[2]))
+            dispatch(setGameComments(response[3]))
             dispatch(setIsGameInfoLoading(false))
 
         })
     }
 }
 
+export const setGameCommentsThunk = (gameId) => {
+    return (dispatch) => {
+        dispatch(setIsGameInfoLoading(true));
+        authAPI.getGameReview(gameId).then(response => {
+            dispatch(setGameComments(response))
+            dispatch(setIsGameInfoLoading(false));
+        })
+    }
+}
 
 export const setGameInfo = (gameInfo) => {
     return {
         type: 'SET_GAME_INFO', gameInfo
+    }
+}
+export const setGameComments = (comments) => {
+    return {
+        type: 'SET_GAME_COMMENTS', comments
     }
 }
 export const setSameGames = (sameGames) => {

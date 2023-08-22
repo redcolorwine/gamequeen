@@ -30,7 +30,9 @@ const GameAbout = (props) => {
     }, [props.wishList])
 
 
+    useEffect(() => {
 
+    }, [props.comments])
     const platformImgs = {
         'PC': computer,
         'Xbox': xbox,
@@ -46,6 +48,8 @@ const GameAbout = (props) => {
     }
     const [curScreen, setCurScreen] = useState(0);
     const [openImg, setOpenImg] = useState(false);
+    const [commentContent, setContent] = useState('');
+
     const { id } = useParams();
 
     const addWish = (e) => {
@@ -66,7 +70,12 @@ const GameAbout = (props) => {
             alert('Вы не зарегистрированы!')
         }
     }
-
+    const sendComment = (e) => {
+        e.preventDefault();
+        if (localStorage.getItem('userId') && commentContent.length > 3) {
+            props.addComment(id, localStorage.getItem('userId'), commentContent)
+        }
+    }
     const clickLeftArrow = () => {
         let lengthImages;
         if (props.gameScreenshots.data?.results.length) {
@@ -216,8 +225,8 @@ const GameAbout = (props) => {
                         <h2>No comments</h2>
                     }
                     <div className={cmedia.addComment}>
-                        <textarea name="comm" id="" cols="30" rows="5"></textarea>
-                        <button>Send</button>
+                        <textarea name="comm" id="" cols="30" rows="5" onChange={(e) => { setContent(e.target.value) }}></textarea>
+                        <button onClick={(e) => { sendComment(e) }}>Send</button>
                     </div>
                 </div>
             </div>

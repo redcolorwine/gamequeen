@@ -42,11 +42,13 @@ export const gamesAPI = {
     async getWishList(wishList) {
 
         let resWishList = [];
-        for (const wish of wishList) {
+        if (wishList) {
+            for (const wish of wishList) {
 
-            const response = await axios(`https://api.rawg.io/api/games/${wish}?key=${process.env.REACT_APP_API_KEY}`);
-            resWishList.push(response.data);
+                const response = await axios(`https://api.rawg.io/api/games/${wish}?key=${process.env.REACT_APP_API_KEY}`);
+                resWishList.push(response.data);
 
+            }
         }
         return resWishList;
     },
@@ -109,6 +111,13 @@ export const authAPI = {
     },
     getGameReview(gameId) {
         return instance.post('reviews/get', { gameId: gameId }).then(response => {
+            return response
+        }).catch(err => {
+            console.log(err)
+        });
+    },
+    setGameReview(gameId, userId, content) {
+        return instance.post('reviews', { gameId: gameId, userId: userId, content: content }).then(response => {
             return response
         }).catch(err => {
             console.log(err)

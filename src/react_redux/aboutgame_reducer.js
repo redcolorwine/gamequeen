@@ -86,7 +86,15 @@ export const setGameCommentsThunk = (gameId) => {
         })
     }
 }
-
+export const addCommentThunk=(gameId, userId, content) => {
+    return (dispatch) => {
+        dispatch(setIsGameInfoLoading(true));
+        authAPI.setGameReview(gameId, userId, content).then(response => {
+            dispatch(setGameComments(response))
+            dispatch(setIsGameInfoLoading(false))
+        })
+    }
+}
 export const setGameInfo = (gameInfo) => {
     return {
         type: 'SET_GAME_INFO', gameInfo
@@ -97,6 +105,7 @@ export const setGameComments = (comments) => {
         type: 'SET_GAME_COMMENTS', comments
     }
 }
+
 export const setSameGames = (sameGames) => {
     return {
         type: 'SET_SAME_GAMES', sameGames

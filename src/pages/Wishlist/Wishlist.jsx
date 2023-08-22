@@ -21,30 +21,37 @@ const Wishlist = (props) => {
 
     }
     else {
-        console.log(props.wishData)
+        console.log(props.wishData.length)
         return (
             <div className={cmedia.wishList}>
                 <div className={cmedia.head}>
                     <h1>My library </h1>
                 </div>
-                <div className={cmedia.items}>
-                    {props.wishData.map((game) => {
-                        return (<GameItem id={game.id}
-                            key={game.id}
-                            img={game?.background_image ? game.background_image : gameu}
-                            added={game.added}
-                            name={game.name}
-                            score={game.metacritic}
-                            releaseDate={game.released}
-                            genres={game.genres}
-                            platforms={game.parent_platforms}
-                            rating={game.rating}
-                            screenshots={game.short_screenshots}
-                            stores={game.stores}
-                        />)
-                    }
-                    )}
-                </div>
+                {props.wishData.length > 0
+                    ? <div className={cmedia.items}>
+                        {props.wishData.map((game) => {
+                            return (<GameItem id={game.id}
+                                key={game.id}
+                                img={game?.background_image ? game.background_image : gameu}
+                                added={game.added}
+                                name={game.name}
+                                score={game.metacritic}
+                                releaseDate={game.released}
+                                genres={game.genres}
+                                platforms={game.parent_platforms}
+                                rating={game.rating}
+                                screenshots={game.short_screenshots}
+                                stores={game.stores}
+                            />)
+                        }
+                        )}
+                    </div>
+                    :
+                    <div>
+                        <h2>You didn't add games in your wishlist</h2>
+                    </div>
+                }
+
             </div>
         )
     }

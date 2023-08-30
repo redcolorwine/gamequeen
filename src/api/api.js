@@ -73,17 +73,15 @@ export const authAPI = {
 
                 return response
             }).catch(err => {
-                console.log(err)
+                throw new Error(err.response.data.message)
             });
     },
     login(email, password) {
         return instance.post('auth/login', { email, password })
             .then(response => {
-                console.log(response)
-
                 return response
             }).catch(err => {
-                console.log(err)
+                throw new Error(err.response.data.message)
             });
     },
     addFavourite(userId, gameId) {
@@ -122,5 +120,12 @@ export const authAPI = {
         }).catch(err => {
             console.log(err)
         });
+    },
+    getUserReviews(userId) {
+        return instance.post('reviews/userreviews', { userId: userId }).then(response => {
+            return response;
+        }).catch(err => {
+            console.log(err)
+        })
     }
 }

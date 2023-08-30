@@ -53,11 +53,11 @@ const Header = (props) => {
                         <img src={ava} alt="" />
                         <h4>{localStorage.getItem('user') ? localStorage.getItem('user') : 'anonymous'}</h4>
                     </div>
-
+                    <p>|</p>
                     <div className={cmedia.links}>
                         {localStorage.getItem('user') ? <a href="#" onClick={() => props.logout()}>log out </a> : <a href="#" onClick={logIn}>log in </a>}
 
-                        <NavLink to="library">my library</NavLink>
+                        {/* <NavLink to="library">my library</NavLink> */}
                     </div>
 
                 </div>

@@ -37,3 +37,14 @@
     border: none;
     border-radius: 5px;
 }
+
+.errarea {
+    margin: 10px 0px 10px 0px;
+    border: 1px solid red;
+    padding: 5px;
+    text-align: center;
+}
+
+.errarea h4 {
+    color: red !important;
+}

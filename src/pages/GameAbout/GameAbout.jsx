@@ -33,6 +33,7 @@ const GameAbout = (props) => {
     useEffect(() => {
 
     }, [props.comments])
+    
     const platformImgs = {
         'PC': computer,
         'Xbox': xbox,

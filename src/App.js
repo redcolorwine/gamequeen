@@ -15,6 +15,7 @@ import PopularCurrentContainer from './pages/Tops/PopularCurrentContainer';
 import Top250Container from './pages/Tops/Top250Container';
 import LeftbarContainer from './components/LeftBar/LeftbarContainer';
 import Footer from './components/footer/footer';
+import ReviewsPageContainer from './pages/Reviews/ReviewsPageContainer';
 
 function App() {
   const { query } = useParams();
@@ -32,6 +33,7 @@ function App() {
             <Route path='/game/:id' element={<GameAboutContainer />} />
             <Route path='/auth' element={<AuthContainer />} />
             <Route path='/wishlist' element={<WishListContainer />} />
+            <Route path='/reviews' element={<ReviewsPageContainer />} />
             <Route path='/library' element={<WishListContainer />} />
             <Route path='/last30days' element={<Last30DaysContainer />} />
             <Route path='/thisweek' element={<ThisWeekContainer />} />
@@ -43,7 +45,7 @@ function App() {
 
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

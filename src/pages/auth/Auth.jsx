@@ -12,14 +12,26 @@ const Auth = (props) => {
 
   const onRegister = async (e) => {
     e.preventDefault();
+
+
     await props.register(email, password)
-    navigate('/');
+    // navigate('/');
+
+
   }
   const onLogin = async (e) => {
     e.preventDefault();
+
     await props.login(email, password)
+
+
+
+  }
+
+  if (localStorage.getItem('user')) {
     navigate('/');
   }
+
   return (
     <div className={cmedia.auth}>
       <h1>Authorization</h1>
@@ -30,11 +42,16 @@ const Auth = (props) => {
           <input type="password" value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='password' />
           {auth ? <button onClick={(e) => onRegister(e)}>Register</button> : <button onClick={(e) => onLogin(e)}>Login</button>}
 
-          <a href="#" onClick={(event) => { event.preventDefault(); setAuth(!auth) }}>{!auth ?
+          {props?.error && <div className={cmedia.errarea}>
+            <h4>{props.error.toString()}</h4>
+          </div>}
+
+          <a href="#" onClick={(event) => { event.preventDefault(); setAuth(!auth) }}>{auth ?
             'Do you need to login?'
             :
             'Do you need to create an account?'
           }</a>
+
         </form>
 
       </div>

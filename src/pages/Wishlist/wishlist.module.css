@@ -4,7 +4,7 @@
 .items {
     margin-top: 40px;
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
     flex-wrap: wrap;
     gap: 8px;
 }

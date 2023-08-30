@@ -38,10 +38,10 @@ a {
 
 @media screen and (max-width:1025px) {}
 
-@media screen and (max-width:769px) {
+@media screen and (max-width:806px) {
   .App-wrapper {
     width: 90%;
-    margin: 40px auto 0px auto;
+    margin: 10px auto 0px auto;
     display: flex;
     flex-direction: column;
     gap: 40px;

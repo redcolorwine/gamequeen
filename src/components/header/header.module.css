@@ -19,6 +19,12 @@
     border: none;
     outline: none;
     background-color: rgb(50, 65, 68);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.search input:hover {
+    transform: scale(1.02, 1.02);
 }
 
 .profile {
@@ -45,9 +51,18 @@
     border-radius: 30px;
 }
 
-.links {}
+.links a {
+    color: rgb(205, 129, 80);
+    text-decoration: underline;
+    font-weight: 800;
+    transition: 0.5s;
+}
 
-@media screen and (max-width:1201px) {
+.links a:hover {
+    color: rgb(234, 234, 236);
+}
+
+@media screen and (max-width:1260px) {
 
     .search input {
         width: 600px;
@@ -56,14 +71,14 @@
 
 }
 
-@media screen and (max-width:1025px) {
+@media screen and (max-width:1027px) {
     .search input {
-        width: 300px;
+        width: 400px;
         padding: 15px;
     }
 }
 
-@media screen and (max-width:769px) {
+@media screen and (max-width:806px) {
     .header {
         width: 100%;
     }

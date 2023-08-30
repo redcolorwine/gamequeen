@@ -6,6 +6,8 @@ let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
         authData: state.auth.authData,
+        error: state.auth.error,
+        isAuthLoading: state.auth.isAuthLoading
     }
 }
 
@@ -20,7 +22,7 @@ let mapDispatchToProps = (dispatch) => {
         register: (email, password) => {
             dispatch(registerThunk(email, password))
         },
-        login:(email, password) => {
+        login: (email, password) => {
             dispatch(loginThunk(email, password))
         }
     }

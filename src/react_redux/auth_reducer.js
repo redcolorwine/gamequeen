@@ -3,7 +3,9 @@ import { authAPI } from "../api/api";
 let initialState = {
     isAuth: false,
     authData: '',
+    error: '',
     wishList: [],
+    isAuthLoading: true,
 }
 
 
@@ -17,7 +19,18 @@ let authReducer = (state = initialState, action) => {
                 isAuth: action.auth
             }
         }
-
+        case 'SET_ERROR': {
+            return {
+                ...state,
+                error: action.error
+            }
+        }
+        case 'SET_IS_AUTH_LOADING': {
+            return {
+                ...state,
+                isAuthLoading: action.loading
+            }
+        }
         case 'SET_AUTH_DATA': {
             return {
                 ...state,
@@ -37,14 +50,21 @@ export const registerThunk = (email, password) => {
 
     return (dispatch) => {
         localStorage.clear()
+
         authAPI.register(email, password).then(response => {
-            dispatch(setAuthData(response.data.email));
-            localStorage.setItem('token', response.data.token)
-            localStorage.setItem('user', response.data.userEmail)
-            localStorage.setItem('userId', response.data.userId)
-            dispatch(setIsAuth(true))
+            setAuthLoading(true)
+            // console.log(response.response.status)
+          
+                dispatch(setAuthData(response.data.email));
+                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('user', response.data.userEmail)
+                localStorage.setItem('userId', response.data.userId)
+                dispatch(setIsAuth(true))
+                setAuthLoading(false)
+            
         }).catch(error => {
-            dispatch(setAuthData(error))
+            dispatch(setError(error.message))
+            setAuthLoading(false)
         })
     }
 }
@@ -53,13 +73,20 @@ export const loginThunk = (email, password) => {
     return (dispatch) => {
         localStorage.clear()
         authAPI.login(email, password).then(response => {
-            dispatch(setAuthData(response.data.email));
-            localStorage.setItem('token', response.data.token)
-            localStorage.setItem('user', response.data.userEmail)
-            localStorage.setItem('userId', response.data.userId)
-            dispatch(setIsAuth(true))
-        }).catch(error => {
-            dispatch(setAuthData(error))
+            setAuthLoading(true)
+            // console.log(response.response.status)
+          
+                dispatch(setAuthData(response.data.email));
+                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('user', response.data.userEmail)
+                localStorage.setItem('userId', response.data.userId)
+                dispatch(setIsAuth(true))
+
+                setAuthLoading(false)
+         
+        }).catch((error) => {
+            dispatch(setError(error.message))
+            setAuthLoading(false)
         })
     }
 }
@@ -81,5 +108,14 @@ export const setAuthData = (authData) => {
         type: 'SET_AUTH_DATA', authData
     }
 }
-
+export const setError = (error) => {
+    return {
+        type: 'SET_ERROR', error
+    }
+}
+export const setAuthLoading = (loading) => {
+    return {
+        type: 'SET_IS_AUTH_LOADING', loading
+    }
+}
 export default authReducer;

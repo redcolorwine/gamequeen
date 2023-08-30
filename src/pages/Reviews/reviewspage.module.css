@@ -1,0 +1,33 @@
+.reviews {}
+
+.reviewItem img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.reviewItem {
+    box-shadow: 0px 0px 10px 0px rgb(156, 161, 154);
+    border-radius: 5px;
+    margin: 0px 0px 20px 0px;
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.reviewItem:hover {
+    transform: scale(1.01, 1.01);
+}
+
+.reviewItem span {
+    color: rgb(156, 161, 154);
+}
+
+.reviewText {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}

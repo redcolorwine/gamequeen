@@ -30,7 +30,7 @@ const Leftbar = (props) => {
             </div>
             <nav className={menu ? [cmedia.navMenu, cmedia.active].join(' ') : [cmedia.navMenu]}>
                 <NavLink onClick={() => showMenu(false)} to="/">Home</NavLink>
-                <NavLink onClick={() => showMenu(false)} to="#">Reviews</NavLink>
+                <NavLink onClick={() => showMenu(false)} to="/reviews">Reviews</NavLink>
                 <div className={cmedia.profile}>
                     <h2>{localStorage.getItem('user') ? localStorage.getItem('user'): 'anonymous'}</h2>
                     {/* <li><AiOutlineGift size={25} /> <NavLink onClick={() => showMenu(false)} to="wishlist">Wishlist</NavLink> </li> */}

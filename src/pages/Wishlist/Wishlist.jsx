@@ -3,6 +3,7 @@ import cmedia from './wishlist.module.css';
 import Preloader from '../../components/preloader/Preloader';
 import GameItem from '../../components/gameItem/GameItem';
 import gameu from './../../media/images/gameu.jpg';
+import NotAuth from '../../components/notAuth/NotAuth';
 
 const Wishlist = (props) => {
 
@@ -14,11 +15,14 @@ const Wishlist = (props) => {
 
     }, [])
 
-    if (!props.wishData) {
+    if (!localStorage.getItem('userId')) {
+        return (<NotAuth />)
+    }
+
+    if (props.isWishPageLoading) {
         return (
             <Preloader />
         )
-
     }
     else {
         console.log(props.wishData.length)

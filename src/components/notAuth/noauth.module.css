@@ -1,0 +1,14 @@
+.notAuth{
+    text-align: center;
+}
+.notAuth h1 {
+    color: rgb(205, 129, 80);
+    margin-bottom: 10px;
+}
+
+.notAuth p {
+    font-size: 15pt;
+}
+.notAuth a{
+    text-decoration: underline;
+}

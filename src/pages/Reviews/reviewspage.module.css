@@ -1,4 +1,6 @@
-.reviews {}
+.reviews h1{
+   margin-bottom: 40px; 
+}
 
 .reviewItem img {
     width: 300px;

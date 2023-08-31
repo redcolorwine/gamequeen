@@ -48,8 +48,7 @@ const Leftbar = (props) => {
                     <li><AiOutlineRadarChart size={25} /> <NavLink onClick={() => showMenu(false)} to="/popularcurrent">Popular in 2023</NavLink> </li>
                     <li><AiOutlineRocket size={25} /> <NavLink onClick={() => showMenu(false)} to="/top250">Top 250</NavLink> </li>
                 </div>
-                <NavLink onClick={() => showMenu(false)} to="/">All Games</NavLink>
-                <NavLink onClick={() => showMenu(false)} to="#">Browse</NavLink>
+               
             </nav>
         </div>
     )

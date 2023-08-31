@@ -4,7 +4,8 @@ import { addWishThunk, getWishListDataThunk, getWishThunk } from "../../react_re
 
 let mapStateToProps = (state) => {
     return {
-        wishData: state.user.wishData
+        wishData: state.user.wishData,
+        isWishPageLoading: state.user.isWishPageLoading
     }
 }
 let mapDispatchToProps = (dispatch) => {
